@@ -1,4 +1,3 @@
-
 /**
  * Kevin Hayes
  * Test Picture Classes
@@ -6,7 +5,7 @@
  * @author (Kevin Hayes)
  * @version (10-19-2016)
  */
-import java.awt.*;
+import java.awt.*; //color class is in awt library
 import java.util.*;
 import java.util.List; // resolves problem with java.awt.List and java.util.List
 public class TestPicture17
@@ -18,24 +17,27 @@ public class TestPicture17
      */
   public static void main(String[] args)
   {
-      //opens picture using a dialog box
-      /**/
+      //opens picture using a dialog box (if needed)
+      /*
      String fileName = FileChooser.pickAFile();
      Picture pictObj = new Picture(fileName);
      pictObj.explore();
+     */
 
      //opens a pictue using a path
      //Picture apic = new Picture("C:\\Users\\khayes\\Favorites\\Documents\APCS- Java\chap03\Curriclum 2013\Picture Color labs\images\\beach.jpg");
      
-     //relative path
+     //relative path (directory/folder/file) (file must be in same folder as code)
      Picture apic = new Picture("images\\beach.jpg");
-     Picture ferris1 = new Picture("images/2000 ferris wheel2.jpg");
-     Picture ferris2 = new Picture("images/2000 ferris wheel2.jpg");
+     Picture ferris1 = new Picture("images/2000 ferris wheel2.jpg"); //copies pixels into a picture object
+     Picture moto = new Picture("images/blueMotorcycle.jpg");
      Picture ferris3 = new Picture("images/2000 ferris wheel2.jpg");
 
-     //apic.explore();
+     //apic.explore(); (displays and refreshes the picture (needed))
      ferris1.explore();
+     //moto.explore();
      
+     //to change color of picture, get all of the pixels
      //makes an array of pixels
      Pixel[] pixels;
      //gets pixels from picture and assigns to pixels array
@@ -46,20 +48,33 @@ public class TestPicture17
 
 
     /**/
-        //access each index
+        //access each index using array notation
     System.out.println(pixels[17]);
-    //access each pixel
+    //access each pixel using method .getPixel()
     Pixel spot = ferris1.getPixel(100,100);
+    Pixel spot50 = ferris1.getPixel(50,50);
+    Color lbsteel = new Color(176,196,222);;
     
+    Pixel spot17 = pixels[17];
+    spot17.setRed(200);
+    spot17.setGreen(175);
+    spot17.setBlue(150);
+    ferris1.explore();
+    
+    spot.setColor(Color.yellow);
+    ferris1.explore();
+    spot50.setColor(lbsteel);
+    ferris1.explore();
+    //gets the color of the pixel
     System.out.println(pixels[17].getColor());
     System.out.println(spot);
-/*
+    /*
     pixels[17].setColor(Color.blue);
     spot.setColor(new Color(252,252,252));
     pixels[500034].setColor(Color.blue);
 
     ferris1.explore();
-/*
+    /*
    // loop to access indexes of array or collection
 
     //for each loop spot  is a ?
@@ -68,34 +83,34 @@ public class TestPicture17
 
 
    
- /**/
-
- /**
-  * Method to clear red from picture
-  * @param none
-  * @return none
-  */
- /*
-    for (Pixel pixelObj : pixels)
-        {
-            //set the red value of the current pixel to the new value
-           
-
-        }
-    ferris1.explore();
+     /**/
     
-/**/
- /**
-  * Method to reduce red from picture by a factor of n
-  * @param none
-  * @return none
-  */
-
-/*
-int value;
-final double  FACTOR = .5;
-    for (Pixel pixelObj : pixels)
-    {
+     /**
+      * Method to clear red from picture
+      * @param none
+      * @return none
+      */
+     /*
+        for (Pixel pixelObj : pixels)
+            {
+                //set the red value of the current pixel to the new value
+               
+    
+            }
+        ferris1.explore();
+        
+    /**/
+     /**
+      * Method to reduce red from picture by a factor of n
+      * @param none
+      * @return none
+      */
+    
+    /*
+    int value;
+    final double  FACTOR = .5;
+        for (Pixel pixelObj : pixels)
+        {
 
         //get the redvalue
         value = pixelObj.getRed();
@@ -112,7 +127,7 @@ final double  FACTOR = .5;
     ferris1.explore();
     ferris2.explore();
 
-  /**/ 
+      /**/ 
     //write/save a picture as a file
     ferris1.write("images/ferris11.jpg");
 
