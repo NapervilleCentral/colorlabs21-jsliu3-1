@@ -1,0 +1,15 @@
+#BlueJ class context
+comment0.target=ColorLabs
+comment1.params=args
+comment1.target=void\ main(java.lang.String[])
+comment2.params=p\ factor
+comment2.target=void\ adjustRed(Picture,\ double)
+comment3.params=p\ factor
+comment3.target=void\ adjustGreen(Picture,\ double)
+comment4.params=p\ factor
+comment4.target=void\ adjustBlue(Picture,\ double)
+comment5.params=p
+comment5.target=void\ negate(Picture)
+comment6.params=p
+comment6.target=void\ grayscale(Picture)
+numComments=7

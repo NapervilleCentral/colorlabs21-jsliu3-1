@@ -34,7 +34,6 @@ public class TestPicture17
      Picture ferris3 = new Picture("images/2000 ferris wheel2.jpg");
 
      //apic.explore(); (displays and refreshes the picture (needed))
-     ferris1.explore();
      //moto.explore();
      
      //to change color of picture, get all of the pixels
@@ -44,7 +43,7 @@ public class TestPicture17
      pixels = ferris1.getPixels();
     
      //how many pixels or how large array
-    System.out.println("This is a large array"+pixels.length  );
+    System.out.println("This is a large array "+pixels.length  );
 
 
     /**/
@@ -62,9 +61,7 @@ public class TestPicture17
     ferris1.explore();
     
     spot.setColor(Color.yellow);
-    ferris1.explore();
     spot50.setColor(lbsteel);
-    ferris1.explore();
     //gets the color of the pixel
     System.out.println(pixels[17].getColor());
     System.out.println(spot);
@@ -72,40 +69,41 @@ public class TestPicture17
     pixels[17].setColor(Color.blue);
     spot.setColor(new Color(252,252,252));
     pixels[500034].setColor(Color.blue);
-
-    ferris1.explore();
-    /*
+    */
+    
    // loop to access indexes of array or collection
 
     //for each loop spot  is a ?
-    for (Pixel spot : pixels)
-    System.out.println( spot );
-
-
-   
-     /**/
-    
-     /**
-      * Method to clear red from picture
-      * @param none
-      * @return none
-      */
-     /*
-        for (Pixel pixelObj : pixels)
-            {
-                //set the red value of the current pixel to the new value
-               
-    
-            }
-        ferris1.explore();
+    int red, blue, green, count = 0;
+    for (Pixel spot1 : pixels) {
+        /*
+        red = spot1.getRed();
+        red = (int) (red * 0.25);
+        spot1.setRed(red);
         
-    /**/
-     /**
-      * Method to reduce red from picture by a factor of n
-      * @param none
-      * @return none
-      */
-    
+        double amount = Math.random();
+        blue = spot1.getBlue();
+        blue = (int) (blue * amount);
+        spot1.setBlue(blue);
+        
+        amount = Math.random();
+        green = spot1.getGreen();
+        green = (int) (green * amount);
+        spot1.setGreen(green);
+        */
+       
+        if (count % 20 == 0) {
+            spot1.setColor(Color.yellow);
+        }
+        /**/
+         /**
+          * Method to reduce red from picture by a factor of n
+          * @param none
+          * @return none
+          */
+        count++;
+    }
+    ferris1.explore();
     /*
     int value;
     final double  FACTOR = .5;
