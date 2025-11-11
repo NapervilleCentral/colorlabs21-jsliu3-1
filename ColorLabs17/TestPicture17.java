@@ -104,6 +104,7 @@ public class TestPicture17
         count++;
     }
     ferris1.explore();
+    ferris1.write("images/SFtry1.jpg");
     /*
     int value;
     final double  FACTOR = .5;
