@@ -34,48 +34,52 @@ public class SheparFaireyLab
          Pixel[] pixels = me.getPixels();
          Pixel[] pixelorder = pixels;
          int counter = 0;
-         double previous = 0;
+         int previous = 0;
+         boolean sort = true;
          for (Pixel pixel : pixels) {
-             int red1 = pixel.getRed();
-             int green1 = pixel.getGreen();
-             int blue1 = pixel.getBlue();
-             
-             double avg = (red1 + green1 + blue1) / 3.0;
-             if (counter == 0) {
-                 previous = avg;
-             }
-             else {
-                 if (avg < previous) {
-                     Pixel temp1 = pixels[counter - 1];
-                     Pixel temp2 = pixels[counter];
-                     pixelorder[counter] = temp1;
-                     pixelorder[counter - 1] = temp2;
+             int avg = (int) pixel.getAverage();
+             Color grayscale = new Color(avg,avg,avg);
+             pixel.setColor(grayscale);
+         }
+         while (sort) {
+             sort = false;
+             for (Pixel pixel : pixels) {
+                 int pixel1 = pixel.getRed();
+                 if (counter == 0) {
+                     previous = pixel1;
                  }
-             }
-             counter++;
+                 else {
+                     if (pixel1 < previous) {
+                         Pixel temp1 = pixels[counter - 1];
+                         Pixel temp2 = pixels[counter];
+                         pixelorder[counter] = temp1;
+                         pixelorder[counter - 1] = temp2;
+                         previous = pixel1;
+                         sort = true;
+                     }
+                 }
+                 counter++;
+                }
          }
          
          int length = pixels.length / 4;
-         int index = 0;
-         for (int i = 0; i < 4; i++) {
-             for (int j = 0; j < length; j++) {
-                 if (i == 0) {
-                     index = Arrays.binarySearch(pixels, pixelorder[j + (length * i)]);
-                     pixels[index].setColor(darkblue);
-                 }
-                 if (i == 1) {
-                     index = Arrays.binarySearch(pixels, pixelorder[j + (length * i)]);
-                     pixels[index].setColor(lightblue);
-                 }
-                 if (i == 2) {
-                     index = Arrays.binarySearch(pixels, pixelorder[j + (length * i)]);
-                     pixels[index].setColor(red);
-                 }
-                 if (i == 3) {
-                     index = Arrays.binarySearch(pixels, pixelorder[j + (length * i)]);
-                     pixels[index].setColor(white);
-                 }
-             }
+         pixels = pixelorder;
+         final double tolerance = 0.0001;
+         Pixel[] pixels1 = Arrays.copyOfRange(pixels, 0, length);
+         Pixel[] pixels2 = Arrays.copyOfRange(pixels, length, length * 2);
+         Pixel[] pixels3 = Arrays.copyOfRange(pixels, length * 2, length * 3);
+         Pixel[] pixels4 = Arrays.copyOfRange(pixels, length * 3, length * 4);
+         for (Pixel pixel : pixels1) {
+             pixel.setColor(darkblue);
+         }
+         for (Pixel pixel : pixels2) {
+             pixel.setColor(lightblue);
+         }
+         for (Pixel pixel : pixels3) {
+             pixel.setColor(red);
+         }
+         for (Pixel pixel : pixels4) {
+             pixel.setColor(white);
          }
          me.explore();
          
