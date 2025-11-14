@@ -32,54 +32,34 @@ public class SheparFaireyLab
           * four equal color groups (balanced)
           */
          Pixel[] pixels = me.getPixels();
-         Pixel[] pixelorder = pixels;
+         Pixel[] pixelsnew = pixels;
          int counter = 0;
          int previous = 0;
-         boolean sort = true;
          for (Pixel pixel : pixels) {
              int avg = (int) pixel.getAverage();
              Color grayscale = new Color(avg,avg,avg);
              pixel.setColor(grayscale);
          }
-         while (sort) {
-             sort = false;
-             for (Pixel pixel : pixels) {
-                 int pixel1 = pixel.getRed();
-                 if (counter == 0) {
-                     previous = pixel1;
-                 }
-                 else {
-                     if (pixel1 < previous) {
-                         Pixel temp1 = pixels[counter - 1];
-                         Pixel temp2 = pixels[counter];
-                         pixelorder[counter] = temp1;
-                         pixelorder[counter - 1] = temp2;
-                         previous = pixel1;
-                         sort = true;
-                     }
-                 }
-                 counter++;
-                }
-         }
+         Arrays.sort(pixelsnew,(num1,num2) -> Integer.compare(sum(num1), sum(num2)));
          
          int length = pixels.length / 4;
-         pixels = pixelorder;
-         final double tolerance = 0.0001;
-         Pixel[] pixels1 = Arrays.copyOfRange(pixels, 0, length);
-         Pixel[] pixels2 = Arrays.copyOfRange(pixels, length, length * 2);
-         Pixel[] pixels3 = Arrays.copyOfRange(pixels, length * 2, length * 3);
-         Pixel[] pixels4 = Arrays.copyOfRange(pixels, length * 3, length * 4);
+         Pixel[] pixels1 = Arrays.copyOfRange(pixelsnew, 0, length);
+         System.out.println(pixels1);
+         Pixel[] pixels2 = Arrays.copyOfRange(pixelsnew, length, length * 2);
+         Pixel[] pixels3 = Arrays.copyOfRange(pixelsnew, length * 2, length * 3);
+         Pixel[] pixels4 = Arrays.copyOfRange(pixelsnew, length * 3, length * 4);
+         ArrayList<Pixel> pixelslist = new ArrayList<>(Arrays.asList(pixelsnew));
          for (Pixel pixel : pixels1) {
-             pixel.setColor(darkblue);
+             pixels[pixelslist.indexOf(pixel)].setColor(darkblue);
          }
          for (Pixel pixel : pixels2) {
-             pixel.setColor(lightblue);
+             pixels[pixelslist.indexOf(pixel)].setColor(lightblue);
          }
          for (Pixel pixel : pixels3) {
-             pixel.setColor(red);
+             pixels[pixelslist.indexOf(pixel)].setColor(red);
          }
          for (Pixel pixel : pixels4) {
-             pixel.setColor(white);
+             pixels[pixelslist.indexOf(pixel)].setColor(white);
          }
          me.explore();
          
@@ -94,5 +74,6 @@ public class SheparFaireyLab
           */
 
          
-    }//main       
+    }//main      
+    public static int sum(Pixel p) { return p.getRed() + p.getGreen() + p.getBlue(); }
 }//class
