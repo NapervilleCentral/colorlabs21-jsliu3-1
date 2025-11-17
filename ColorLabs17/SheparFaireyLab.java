@@ -25,14 +25,14 @@ public class SheparFaireyLab
          Color darkblue = new Color(95,158,160);
          Color lightblue = new Color(173,216,230);
          Color red = new Color(255,0,0);
-         Color white = new Color(255,255,255);
+         Color white = new Color(245,245,245);
          
          /**
           * method 1 change
           * four equal color groups (balanced)
           */
+         /*
          Pixel[] pixels = me.getPixels();
-         Pixel[] pixelsnew = pixels;
          int counter = 0;
          int previous = 0;
          for (Pixel pixel : pixels) {
@@ -40,40 +40,103 @@ public class SheparFaireyLab
              Color grayscale = new Color(avg,avg,avg);
              pixel.setColor(grayscale);
          }
-         Arrays.sort(pixelsnew,(num1,num2) -> Integer.compare(sum(num1), sum(num2)));
-         
-         int length = pixels.length / 4;
-         Pixel[] pixels1 = Arrays.copyOfRange(pixelsnew, 0, length);
-         System.out.println(pixels1);
-         Pixel[] pixels2 = Arrays.copyOfRange(pixelsnew, length, length * 2);
-         Pixel[] pixels3 = Arrays.copyOfRange(pixelsnew, length * 2, length * 3);
-         Pixel[] pixels4 = Arrays.copyOfRange(pixelsnew, length * 3, length * 4);
-         ArrayList<Pixel> pixelslist = new ArrayList<>(Arrays.asList(pixelsnew));
-         for (Pixel pixel : pixels1) {
-             pixels[pixelslist.indexOf(pixel)].setColor(darkblue);
-         }
-         for (Pixel pixel : pixels2) {
-             pixels[pixelslist.indexOf(pixel)].setColor(lightblue);
-         }
-         for (Pixel pixel : pixels3) {
-             pixels[pixelslist.indexOf(pixel)].setColor(red);
-         }
-         for (Pixel pixel : pixels4) {
-             pixels[pixelslist.indexOf(pixel)].setColor(white);
+         double colorrange = 255/4.0;
+         for (Pixel pixel : pixels) {
+             int color = pixel.getRed();
+             if (color < colorrange) {
+                 pixel.setColor(darkblue);
+             }
+             else if (color < colorrange * 2) {
+                 pixel.setColor(lightblue);
+             }
+             else if (color < colorrange * 3) {
+                 pixel.setColor(red);
+             }
+             else {
+                 pixel.setColor(white);
+             }
          }
          me.explore();
+         me.write("images/SFMethod1.jpg");
          
-         
+         */
          /**
           * method 2 change
-          * 
+          * range based on minimum and maximum
           */
          
+         int max = -1, min = 256;
+         Pixel[] pixels2 = me1.getPixels();
+         for (Pixel pixel : pixels2) {
+             int avg = (int) pixel.getAverage();
+             Color grayscale = new Color(avg,avg,avg);
+             pixel.setColor(grayscale);
+             
+             if (pixel.getRed() > max) {
+                 max = pixel.getRed();
+             }
+             if (pixel.getRed() < min) {
+                 min = pixel.getRed();
+             }
+         }
+         double range = (max - min) / 4.0;
+         for (Pixel pixel : pixels2) {
+             int color = pixel.getRed();
+             if (color < range) {
+                 pixel.setColor(darkblue);
+             }
+             else if (color < range * 2) {
+                 pixel.setColor(lightblue);
+             }
+             else if (color < range * 3) {
+                 pixel.setColor(red);
+             }
+             else {
+                 pixel.setColor(white);
+             }
+         }
+         /*
+         me1.explore();
+         me1.write("images/SFMethod2.jpg");
+         */
          /**
-          * custom color palette
+          * custom color palette (yellow/blue)
           */
-
-         
+         Color lightyellow = new Color(255,255,0);
+         Color darkyellow = new Color(218,165,32);
+         max = -1;
+         min = 256;
+         Pixel[] pixels3 = me2.getPixels();
+         for (Pixel pixel : pixels3) {
+             int avg = (int) pixel.getAverage();
+             Color grayscale = new Color(avg,avg,avg);
+             pixel.setColor(grayscale);
+             
+             if (pixel.getRed() > max) {
+                 max = pixel.getRed();
+             }
+             if (pixel.getRed() < min) {
+                 min = pixel.getRed();
+             }
+         }
+         range = (max - min) / 4.0;
+         for (Pixel pixel : pixels3) {
+             int color = pixel.getRed();
+             if (color < range) {
+                 pixel.setColor(darkblue);
+             }
+             else if (color < range * 2) {
+                 pixel.setColor(lightblue);
+             }
+             else if (color < range * 3) {
+                 pixel.setColor(darkyellow);
+             }
+             else {
+                 pixel.setColor(lightyellow);
+             }
+         }
+         me2.explore();
+         me2.write("images/SFTry1.jpg");
     }//main      
     public static int sum(Pixel p) { return p.getRed() + p.getGreen() + p.getBlue(); }
 }//class

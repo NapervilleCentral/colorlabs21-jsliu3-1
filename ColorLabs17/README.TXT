@@ -14,7 +14,5 @@ USER INSTRUCTIONS:
 1: who critiqued me
 2: what was their critique
 
-1: 
-2: 
-3: 
-4:
+1: Finn: minion colors
+2: Ben: lowkey fire
