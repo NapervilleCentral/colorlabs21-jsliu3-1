@@ -16,3 +16,5 @@ USER INSTRUCTIONS:
 
 1: Finn: minion colors
 2: Ben: lowkey fire
+
+overall they didn't give much criticism
