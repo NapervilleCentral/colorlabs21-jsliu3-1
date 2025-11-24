@@ -11,10 +11,8 @@ HOW TO START THIS PROJECT:
 AUTHORS:
 USER INSTRUCTIONS:
 
-1: who critiqued me
-2: what was their critique
+Try 1: Ben: Back wall is too bright
+Try 2: Finn: Bottom right is a little too bright (the stand part)
+Try 3: Ben: Thumb blends into the background
 
-1: Finn: minion colors
-2: Ben: lowkey fire
 
-overall they didn't give much criticism

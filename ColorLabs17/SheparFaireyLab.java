@@ -122,13 +122,13 @@ public class SheparFaireyLab
          range = (max - min) / 4.0;
          for (Pixel pixel : pixels3) {
              int color = pixel.getRed();
-             if (color < range) {
+             if (color < range + 10) {
                  pixel.setColor(darkblue);
              }
              else if (color < range * 2) {
                  pixel.setColor(lightblue);
              }
-             else if (color < range * 3) {
+             else if (color < range * 3 + 15) {
                  pixel.setColor(darkyellow);
              }
              else {
@@ -136,7 +136,7 @@ public class SheparFaireyLab
              }
          }
          me2.explore();
-         me2.write("images/SFTry1.jpg");
+         me2.write("images/SFmyFinal.jpg");
     }//main      
     public static int sum(Pixel p) { return p.getRed() + p.getGreen() + p.getBlue(); }
 }//class
