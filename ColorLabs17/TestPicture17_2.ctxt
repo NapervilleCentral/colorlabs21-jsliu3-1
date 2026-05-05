@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.target=TestPicture17_2
+comment1.params=args
+comment1.target=void\ main(java.lang.String[])
+comment1.text=\r\n\ main\ method,\ to\ test\ the\ picture\r\n\r\n
+comment2.params=temple
+comment2.target=void\ mirrorTemple(Picture)
+numComments=3
