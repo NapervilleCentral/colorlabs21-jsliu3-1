@@ -1,6 +1,13 @@
 #BlueJ class context
 comment0.target=collage
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ collage\ here.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
-comment1.params=
-comment1.target=void\ main()
-numComments=2
+comment1.params=args
+comment1.target=void\ main(java.lang.String[])
+comment2.params=source\ target
+comment2.target=void\ copyToCanvas(Picture,\ Picture)
+comment3.params=image
+comment3.target=void\ mirrorImage(Picture)
+comment4.params=image
+comment4.target=void\ posterize(Picture)
+comment5.params=image
+comment5.target=void\ grayscale(Picture)
+numComments=6
