@@ -15,11 +15,16 @@ public class collage
         Picture canvas = new Picture("images/canvas.jpg");
         copyToCanvas(glung, canvas);
         mirrorImage(glung);
-        //copyToCanvas(glung, canvas);
-        glung = new Picture("images/he might not be tuff guys.png");
-        posterize(glung);
         copyToCanvas(glung, canvas);
         glung = new Picture("images/he might not be tuff guys.png");
+        inverse(glung);
+        copyToCanvas(glung, canvas);
+        glung = new Picture("images/he might not be tuff guys.png");
+        grayscale(glung);
+        copyToCanvas(glung, canvas);
+        glung = new Picture("images/he might not be tuff guys.png");
+        recursiveleftcorner(glung);
+        copyToCanvas(glung, canvas);
         canvas.explore();
   }
   public static void copyToCanvas(Picture source, Picture target) {
@@ -33,7 +38,7 @@ public class collage
           }
       }
       offsetX += source.getWidth();
-      if (offsetX > target.getWidth()) {
+      if (offsetX + source.getWidth() > target.getWidth()) {
           offsetX = 0;
           offsetY += source.getHeight();
       }
@@ -58,13 +63,13 @@ public class collage
       Color red = new Color(255,0,0);
       Color white = new Color(245,245,245);
       Pixel[] pixels = image.getPixels();
-      double colorrange = 255/4.0;
+      double colorrange = 255/5.0;
       for (Pixel pixel : pixels) {
           int color = pixel.getRed();
-          if (color < colorrange) {
+          if (color < 25) {
               pixel.setColor(darkblue);
           }
-          else if (color < colorrange * 2) {
+          else if (color < 55) {
               pixel.setColor(lightblue);
           }
           else if (color < colorrange * 3) {
@@ -75,12 +80,36 @@ public class collage
           }
       }
   }
+  public static void inverse(Picture image) {
+      Pixel[] pixels = image.getPixels();
+      for (Pixel pixel: pixels) {
+          pixel.setColor(new Color(255 - pixel.getRed(), 255 - pixel.getGreen(), 255 - pixel.getBlue()));
+      }
+  }
   public static void grayscale(Picture image) {
       Pixel[] pixels = image.getPixels();
       for (Pixel pixel : pixels) {
              int avg = (int) pixel.getAverage();
              Color grayscale = new Color(avg,avg,avg);
              pixel.setColor(grayscale);
-         }
+      }
+  }
+  public static void recursiveleftcorner(Picture image) {
+      recursiveleftcorner(image, image.getWidth() / 2, image.getHeight() / 2);
+  }
+  public static void recursiveleftcorner(Picture image, int subwidth, int subheight) {
+      Pixel[] pixels = image.getPixels();
+      if (subwidth < 25 || subheight < 25) {
+          return;
+      }
+      for (int i = subwidth; i >= 0; i--) {
+          for (int j = 0; j < subheight; j++) {
+              image.getPixel(i, j).setColor(image.getPixel(i * 2, j * 2).getColor());
+          }
+      }
+      recursiveleftcorner(image, subwidth / 2, subheight / 2);
+  }
+  public static void deepfryer(Picture image) {
+      
   }
 }
