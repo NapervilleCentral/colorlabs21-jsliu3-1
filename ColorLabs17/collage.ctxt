@@ -2,6 +2,10 @@
 comment0.target=collage
 comment1.params=args
 comment1.target=void\ main(java.lang.String[])
+comment10.params=image
+comment10.target=void\ deeperfryer(Picture)
+comment11.params=image
+comment11.target=void\ brightnessSpam(Picture)
 comment2.params=source\ target
 comment2.target=void\ copyToCanvas(Picture,\ Picture)
 comment3.params=image
@@ -18,4 +22,4 @@ comment8.params=image\ subwidth\ subheight
 comment8.target=void\ recursiveleftcorner(Picture,\ int,\ int)
 comment9.params=image
 comment9.target=void\ deepfryer(Picture)
-numComments=10
+numComments=12

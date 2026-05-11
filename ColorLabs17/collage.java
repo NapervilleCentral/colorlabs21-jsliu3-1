@@ -20,10 +20,16 @@ public class collage
         inverse(glung);
         copyToCanvas(glung, canvas);
         glung = new Picture("images/he might not be tuff guys.png");
-        grayscale(glung);
+        deepfryer(glung);
+        copyToCanvas(glung, canvas);
+        glung = new Picture("images/he might not be tuff guys.png");
+        deeperfryer(glung);
         copyToCanvas(glung, canvas);
         glung = new Picture("images/he might not be tuff guys.png");
         recursiveleftcorner(glung);
+        copyToCanvas(glung, canvas);
+        glung = new Picture("images/he might not be tuff guys.png");
+        brightnessSpam(glung);
         copyToCanvas(glung, canvas);
         canvas.explore();
   }
@@ -110,6 +116,93 @@ public class collage
       recursiveleftcorner(image, subwidth / 2, subheight / 2);
   }
   public static void deepfryer(Picture image) {
-      
+      int border = 256/2;
+      Pixel[] pixels = image.getPixels();
+      for (Pixel pixel: pixels) {
+          if (pixel.getAverage() > border) {
+              int newred = pixel.getRed() * 2;
+              if (newred > 255)
+                  newred = 255;
+              int newgreen = pixel.getRed() * 2;
+              if (newgreen > 255)
+                  newgreen = 255;
+              int newblue = pixel.getRed() * 2;
+              if (newblue > 255)
+                  newblue = 255;
+              pixel.setColor(new Color(newred, newgreen, newblue));
+          }
+          else {
+              int newred = pixel.getRed() - 50;
+              if (newred < 0)
+                  newred = 0;
+              int newgreen = pixel.getRed() - 50;
+              if (newgreen < 0)
+                  newgreen = 0;
+              int newblue = pixel.getRed() - 50;
+              if (newblue < 0)
+                  newblue = 0;
+              pixel.setColor(new Color(newred, newgreen, newblue));
+          }
+      }
+  }
+  public static void deeperfryer(Picture image) {
+      int border = 256/2;
+      Pixel[] pixels = image.getPixels();
+      for (Pixel pixel: pixels) {
+          if (pixel.getAverage() > border) {
+              int newred = pixel.getRed() + 75;
+              if (newred > 255)
+                  newred = 255;
+              int newgreen = pixel.getGreen() + 75;
+              if (newgreen > 255)
+                  newgreen = 255;
+              int newblue = pixel.getBlue() + 75;
+              if (newblue > 255)
+                  newblue = 255;
+              pixel.setColor(new Color(newred, newgreen, newblue));
+          }
+          else {
+              int newred = pixel.getRed() - 30;
+              if (newred < 0)
+                  newred = 0;
+              int newgreen = pixel.getGreen() - 30;
+              if (newgreen < 0)
+                  newgreen = 0;
+              int newblue = pixel.getBlue() - 30;
+              if (newblue < 0)
+                  newblue = 0;
+              pixel.setColor(new Color(newred, newgreen, newblue));
+          }
+      }
+  }
+  public static void brightnessSpam(Picture image) {
+      int border = 256/2;
+      Pixel[] pixels = image.getPixels();
+      for (Pixel pixel: pixels) {
+          if (pixel.getAverage() > border) {
+              int newred = pixel.getRed() + 110;
+              if (newred > 255)
+                  newred = 255;
+              int newgreen = pixel.getGreen() + 110;
+              if (newgreen > 255)
+                  newgreen = 255;
+              int newblue = pixel.getBlue() + 110;
+              if (newblue > 255)
+                  newblue = 255;
+              pixel.setColor(new Color(newred, newgreen, newblue));
+          }
+          else {
+              int newred = pixel.getRed() + 50;
+              if (newred > 255)
+                  newred = 255;
+              int newgreen = pixel.getGreen() + 50;
+              if (newgreen > 255)
+                  newgreen = 255;
+              int newblue = pixel.getBlue() + 50;
+              if (newblue > 255)
+                  newblue = 255;
+              pixel.setColor(new Color(newred, newgreen, newblue));
+          }
+      }
   }
 }
