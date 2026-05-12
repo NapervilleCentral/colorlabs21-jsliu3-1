@@ -1,8 +1,5 @@
 /**
- * Write a description of class collage here.
- *
- * @author (your name)
- * @version (a version number or a date)
+ * Joshua Liu
  */
 import java.awt.*; //color class is in awt library
 import java.util.*;
@@ -11,25 +8,28 @@ public class collage
 {
   static int offsetX, offsetY = 0;
   public static void main(String[] args) {
-        Picture glung = new Picture("images/he might not be tuff guys.png");
+        Picture glung = new Picture("images/orb.png");
         Picture canvas = new Picture("images/canvas.jpg");
         copyToCanvas(glung, canvas);
         mirrorImage(glung);
         copyToCanvas(glung, canvas);
-        glung = new Picture("images/he might not be tuff guys.png");
+        glung = new Picture("images/orb.png");
         inverse(glung);
         copyToCanvas(glung, canvas);
-        glung = new Picture("images/he might not be tuff guys.png");
+        glung = new Picture("images/orb.png");
+        blackfryer(glung);
+        copyToCanvas(glung, canvas);
+        glung = new Picture("images/orb.png");
         deepfryer(glung);
         copyToCanvas(glung, canvas);
-        glung = new Picture("images/he might not be tuff guys.png");
-        deeperfryer(glung);
-        copyToCanvas(glung, canvas);
-        glung = new Picture("images/he might not be tuff guys.png");
+        glung = new Picture("images/orb.png");
         recursiveleftcorner(glung);
         copyToCanvas(glung, canvas);
-        glung = new Picture("images/he might not be tuff guys.png");
-        brightnessSpam(glung);
+        glung = new Picture("images/orb.png");
+        redspam(glung);
+        copyToCanvas(glung, canvas);
+        glung = new Picture("images/orb.png");
+        flashbang(glung);
         copyToCanvas(glung, canvas);
         canvas.explore();
   }
@@ -105,104 +105,100 @@ public class collage
   }
   public static void recursiveleftcorner(Picture image, int subwidth, int subheight) {
       Pixel[] pixels = image.getPixels();
+      //base case
       if (subwidth < 25 || subheight < 25) {
           return;
       }
+      //recursive case
       for (int i = subwidth; i >= 0; i--) {
           for (int j = 0; j < subheight; j++) {
-              image.getPixel(i, j).setColor(image.getPixel(i * 2, j * 2).getColor());
+              image.getPixel(i, j).setColor(new Color(255 - image.getPixel(i * 2, j * 2).getRed(), 255 - image.getPixel(i * 2, j * 2).getGreen(), 255 - image.getPixel(i * 2, j * 2).getBlue()));
           }
       }
       recursiveleftcorner(image, subwidth / 2, subheight / 2);
+  }
+  public static void blackfryer(Picture image) {
+      grayscale(image);
+      Color black = new Color(2, 2, 2);
+      Color darkgray = new Color(96, 96, 96);
+      Color gray = new Color(160, 160, 160);
+      Color white = new Color(245,245,245);
+      Pixel[] pixels = image.getPixels();
+      for (Pixel pixel : pixels) {
+          int color = pixel.getRed();
+          if (color < 60) {
+              pixel.setColor(black);
+          }
+          else if (color < 128) {
+              pixel.setColor(darkgray);
+          }
+          else if (color < 192) {
+              pixel.setColor(gray);
+          }
+          else {
+              pixel.setColor(white);
+          }
+      }
   }
   public static void deepfryer(Picture image) {
       int border = 256/2;
       Pixel[] pixels = image.getPixels();
       for (Pixel pixel: pixels) {
           if (pixel.getAverage() > border) {
-              int newred = pixel.getRed() * 2;
+              int newred = pixel.getRed() + 85;
               if (newred > 255)
                   newred = 255;
-              int newgreen = pixel.getRed() * 2;
+              int newgreen = pixel.getGreen() + 85;
               if (newgreen > 255)
                   newgreen = 255;
-              int newblue = pixel.getRed() * 2;
+              int newblue = pixel.getBlue() + 85;
               if (newblue > 255)
                   newblue = 255;
               pixel.setColor(new Color(newred, newgreen, newblue));
           }
           else {
-              int newred = pixel.getRed() - 50;
+              int newred = pixel.getRed() - 40;
               if (newred < 0)
                   newred = 0;
-              int newgreen = pixel.getRed() - 50;
+              int newgreen = pixel.getGreen() - 40;
               if (newgreen < 0)
                   newgreen = 0;
-              int newblue = pixel.getRed() - 50;
+              int newblue = pixel.getBlue() - 40;
               if (newblue < 0)
                   newblue = 0;
               pixel.setColor(new Color(newred, newgreen, newblue));
           }
       }
   }
-  public static void deeperfryer(Picture image) {
-      int border = 256/2;
+  public static void redspam(Picture image) {
       Pixel[] pixels = image.getPixels();
       for (Pixel pixel: pixels) {
-          if (pixel.getAverage() > border) {
-              int newred = pixel.getRed() + 75;
-              if (newred > 255)
-                  newred = 255;
-              int newgreen = pixel.getGreen() + 75;
-              if (newgreen > 255)
-                  newgreen = 255;
-              int newblue = pixel.getBlue() + 75;
-              if (newblue > 255)
-                  newblue = 255;
-              pixel.setColor(new Color(newred, newgreen, newblue));
-          }
-          else {
-              int newred = pixel.getRed() - 30;
-              if (newred < 0)
-                  newred = 0;
-              int newgreen = pixel.getGreen() - 30;
-              if (newgreen < 0)
-                  newgreen = 0;
-              int newblue = pixel.getBlue() - 30;
-              if (newblue < 0)
-                  newblue = 0;
-              pixel.setColor(new Color(newred, newgreen, newblue));
-          }
+          int newred = pixel.getRed();
+          int newgreen = pixel.getGreen();
+          int newblue = pixel.getBlue();
+          
+          newred = pixel.getRed() + 115;
+          if (newred > 255)
+              newred = 255;
+          pixel.setColor(new Color(newred, newgreen, newblue));
       }
   }
-  public static void brightnessSpam(Picture image) {
-      int border = 256/2;
+  public static void flashbang(Picture image) {
       Pixel[] pixels = image.getPixels();
       for (Pixel pixel: pixels) {
-          if (pixel.getAverage() > border) {
-              int newred = pixel.getRed() + 110;
-              if (newred > 255)
-                  newred = 255;
-              int newgreen = pixel.getGreen() + 110;
-              if (newgreen > 255)
-                  newgreen = 255;
-              int newblue = pixel.getBlue() + 110;
-              if (newblue > 255)
-                  newblue = 255;
-              pixel.setColor(new Color(newred, newgreen, newblue));
+          int red = pixel.getRed() + 160;
+          int green = pixel.getGreen() + 160;
+          int blue = pixel.getBlue() + 160;
+          if (red > 255) {
+              red = 255;
           }
-          else {
-              int newred = pixel.getRed() + 50;
-              if (newred > 255)
-                  newred = 255;
-              int newgreen = pixel.getGreen() + 50;
-              if (newgreen > 255)
-                  newgreen = 255;
-              int newblue = pixel.getBlue() + 50;
-              if (newblue > 255)
-                  newblue = 255;
-              pixel.setColor(new Color(newred, newgreen, newblue));
+          if (green > 255) {
+              green = 255;
           }
+          if (blue > 255) {
+              blue = 255;
+          }
+          pixel.setColor(new Color(red, green, blue));
       }
   }
 }
