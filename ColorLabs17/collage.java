@@ -9,18 +9,19 @@ public class collage
   static int offsetX, offsetY = 0;
   public static void main(String[] args) {
         Picture glung = new Picture("images/orb.png");
+        Picture other = new Picture("images/he might not be tuff guys.png");
         Picture canvas = new Picture("images/canvas.jpg");
         copyToCanvas(glung, canvas);
         mirrorImage(glung);
         copyToCanvas(glung, canvas);
         glung = new Picture("images/orb.png");
-        inverse(glung);
+        blender(glung, other);
         copyToCanvas(glung, canvas);
         glung = new Picture("images/orb.png");
         blackfryer(glung);
         copyToCanvas(glung, canvas);
         glung = new Picture("images/orb.png");
-        deepfryer(glung);
+        flashbang(glung);
         copyToCanvas(glung, canvas);
         glung = new Picture("images/orb.png");
         recursiveleftcorner(glung);
@@ -29,9 +30,15 @@ public class collage
         redspam(glung);
         copyToCanvas(glung, canvas);
         glung = new Picture("images/orb.png");
-        flashbang(glung);
+        deepfryer(glung);
+        copyToCanvas(glung, canvas);
+        glung = new Picture("images/orb.png");
+        yellowspam(glung);
         copyToCanvas(glung, canvas);
         canvas.explore();
+        
+        canvas.write(FileChooser.getMediaPath("images/canvas.jpg"));
+        canvas.write("images/finalcollage.jpg");
   }
   public static void copyToCanvas(Picture source, Picture target) {
       Pixel sourcePix = null;
@@ -86,10 +93,16 @@ public class collage
           }
       }
   }
-  public static void inverse(Picture image) {
-      Pixel[] pixels = image.getPixels();
-      for (Pixel pixel: pixels) {
-          pixel.setColor(new Color(255 - pixel.getRed(), 255 - pixel.getGreen(), 255 - pixel.getBlue()));
+  public static void blender(Picture image1, Picture image2) {
+      Pixel[] pixels1 = image1.getPixels();
+      Pixel[] pixels2 = image2.getPixels();
+      Picture blended = image1;
+      Pixel[] pixelnew = blended.getPixels();
+      for (int i = 0; i < pixels1.length; i++) {
+          int newred = (pixels1[i].getRed() + pixels2[i].getRed()) / 2;
+          int newgreen = (pixels1[i].getGreen() + pixels2[i].getGreen()) / 2;
+          int newblue = (pixels1[i].getBlue() + pixels2[i].getBlue()) / 2;
+          pixelnew[i].setColor(new Color(newred, newgreen, newblue));
       }
   }
   public static void grayscale(Picture image) {
@@ -186,9 +199,27 @@ public class collage
   public static void flashbang(Picture image) {
       Pixel[] pixels = image.getPixels();
       for (Pixel pixel: pixels) {
-          int red = pixel.getRed() + 160;
-          int green = pixel.getGreen() + 160;
-          int blue = pixel.getBlue() + 160;
+          int red = pixel.getRed() + 155;
+          int green = pixel.getGreen() + 155;
+          int blue = pixel.getBlue() + 155;
+          if (red > 255) {
+              red = 255;
+          }
+          if (green > 255) {
+              green = 255;
+          }
+          if (blue > 255) {
+              blue = 255;
+          }
+          pixel.setColor(new Color(red, green, blue));
+      }
+  }
+  public static void yellowspam(Picture image) {
+      Pixel[] pixels = image.getPixels();
+      for (Pixel pixel: pixels) {
+          int red = pixel.getRed() + 67;
+          int green = pixel.getGreen() + 67;
+          int blue = pixel.getBlue();
           if (red > 255) {
               red = 255;
           }
